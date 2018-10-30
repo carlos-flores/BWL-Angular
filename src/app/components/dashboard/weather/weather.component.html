@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>Clima en Orizaba</h2>
+        </div>
+
+        <div class="card-body">
+            <div *ngIf="datosClima">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="text-center">
+                            <img class="rounded" src="assets/images/{{datosClima.WeatherIcon}}-s.png" width="120px" height="120px">
+                        </p>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">DETALLES</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    Clima : {{datosClima.WeatherText}} <br> Última Fecha: {{datosClima.LocalObservationDateTime|date:"dd/MM/yy HH:mm"}} <br> Temperatura: {{datosClima.Temperature.Metric.Value}} °C
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

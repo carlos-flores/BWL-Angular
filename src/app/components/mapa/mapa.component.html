@@ -1,0 +1,78 @@
+<br>
+<form #formulario="ngForm" (ngSubmit)="buscarClientes(formulario)" novalidate="novalidate">
+    <div class="card">
+        <div class="card-header">
+            <div class="form-row">
+                <div class="col-md-10">
+                    <h3 *ngIf="lstPuntos.length>0">Filtros de Clientes({{lstPuntos.length}})</h3>
+                    <h3 *ngIf="lstPuntos.length==0">Filtros de Clientes</h3>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block" [disabled]="formulario.invalid">Buscar</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+
+                    <label>
+                            Estado
+                        </label>
+
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <select2 [data]="estadosData" width="100%" [options]="optionsEstados" [value]="estadosValue" (valueChanged)="estadosSeleccionados($event)"></select2>
+                </div>
+            </div>
+
+
+            <div *ngIf="!cargandoPuntos">
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]='true' (mapClick)="mapaPresionado($event)">
+                    <agm-marker *ngFor="let marcador of lstPuntos; let i = index" (markerClick)="marcadorPresionado(marcador,i)" [latitude]="marcador.latitud" [longitude]="marcador.longitud" [markerDraggable]="marcador.arrastrable" (dragEnd)='marcadorArrastrado(marcador, $event)'>
+                        <agm-snazzy-info-window [latitude]="lat" [longitude]="lng" [isOpen]="false" [maxWidth]="700" [closeWhenOthersOpen]="true" (close)="cerrarWindow()">
+                            <ng-template>
+                                <div class="card" style="width: 600px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">[{{marcador.id}}] {{marcador.nombre}}</h5>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>Ciudad:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <label>{{marcador.ciudad}}, {{marcador.estado}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>Dirección:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <label>{{marcador.calle}}. {{marcador.codigo_postal}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>Facturas:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <label>{{marcador.totalFacturas}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </agm-snazzy-info-window>
+                    </agm-marker>
+                </agm-map>
+            </div>
+            <br />
+            <div class="text-center cajaLoading" *ngIf="cargandoPuntos">
+                <i class="fas fa-spinner fa-pulse fa-10x cargando"></i>
+            </div>
+        </div>
+    </div>
+</form>

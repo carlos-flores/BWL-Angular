@@ -1,0 +1,45 @@
+<br />
+<div class="card">
+    <div class="card-header">
+        <div class="form-row">
+            <div class="col-md-11">
+                <h2>Usuarios <i class="fas fa-spinner fa-pulse fa-1x cargando" *ngIf="cargandoUsuarios"></i></h2>
+            </div>
+            <div class="col-md-1 text-right">
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-over table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Nombre(s)</th>
+                    <th scope="col">Apellido(s)</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios; let i = index">
+                    <td>{{ i + 1}}</td>
+                    <td>{{usuario.username}}</td>
+                    <td>{{usuario.nombre}}</td>
+                    <td>{{usuario.apellidos}}</td>
+                    <td>{{usuario.email}}</td>
+                    <td>
+                        <div *ngIf="usuario.role === 'ADMIN'">
+                            <i class="fas fa-user-tie"> </i> Administrador
+                        </div>
+                        <div *ngIf="usuario.role === 'USER'">
+                            Usuario
+                        </div>
+                    </td>
+                    <td>{{usuario.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

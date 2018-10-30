@@ -1,0 +1,50 @@
+<header id="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" [routerLink]="['home']">
+            <h2>BWL</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" *ngIf="usuarioRegistrado" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="['dashboard']"><i class="fas fa-home"></i> Dashboard</a>
+                </li>
+                <li class="nav-item" *ngIf="usuarioRegistrado" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="['mapa']"><i class="fas fa-address-book"></i> Mapa</a>
+                </li>
+                <li class="nav-item" *ngIf="usuarioRegistrado && usuarioRegistrado.role==='ADMIN'" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="['usuarios']"><i class="fas fa-users"></i> Usuarios</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <!-- <li class="nav-item" *ngIf="!usuarioRegistrado">
+                    <a class="nav-link" [routerLink]="['register']">Registrarme</a>
+                </li> -->
+                <li class="nav-item" *ngIf="!usuarioRegistrado">
+                    <a class="nav-link" [routerLink]="['login']">Login</a>
+                </li>
+
+                <li class="nav-item dropdown" *ngIf="usuarioRegistrado">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-tie"></i> Usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <!-- <a class="dropdown-item" href="#">
+                            <i class="fas fa-user-edit"></i> Mi cuenta</a> -->
+                        <a class="dropdown-item" [routerLink]="['logout',1]">
+                            <i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

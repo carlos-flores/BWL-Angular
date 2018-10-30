@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>Crear Tarea</h2>
+        </div>
+
+        <div class="card-body">
+
+            <form #formulario="ngForm" (ngSubmit)="registrarTarea(formulario)" novalidate="novalidate">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Título</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" [(ngModel)]="tareaNueva.titulo" name="titulo" #tituloControl="ngModel" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Descripción</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" [(ngModel)]="tareaNueva.descripcion" name="descripcion" #descripcionControl="ngModel" required rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Fecha Entrega</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" [(ngModel)]="tareaNueva.fechaentrega" name="fechaentrega" #fechaentregaControl="ngModel" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="!formulario.valid && !registrandoTarea"><i class="fas fa-save"></i>
+  Registrar</button>
+            </form>
+
+
+        </div>
+    </div>
+</div>
